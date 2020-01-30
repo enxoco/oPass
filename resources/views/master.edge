@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Hello Adonis</title>
+  {{ style('https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css') }}
+  {{ style('style') }}
+</head>
+<body>
+  @include('nav')
+  <main class="main">
+    @!section('content') 
+  </main>
+  {{ script('https://code.jquery.com/jquery-3.4.1.slim.min.js') }}
+  {{ script('https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js') }}
+  {{ script('https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js') }} 
+
+  <script>
+    function copyPass() {
+      let pass = document.getElementById("passField");
+
+      if (pass.type === 'password') {
+        pass.type = 'text'
+        pass.select()
+        document.execCommand('copy')
+        pass.blur()
+        pass.type = 'password'
+      } else {
+        pass.select()
+        document.execCommand('copy')
+        pass.deselect()
+        pass.blur()
+      }
+
+    }
+    function revealPass() {
+  /* Get the text field */
+    let pass = document.getElementById("passField");
+
+    if (pass.type === 'password') {
+      pass.type = 'text'
+    } else {
+      pass.type = 'password'
+    }
+  }
+  </script>
+</body>
+</html>

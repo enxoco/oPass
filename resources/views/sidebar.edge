@@ -1,0 +1,5 @@
+<ul class="list-group w-50">
+  @each(p in passwords)
+    <li class="list-group-item password-list"><a href="{{ p.id }}">{{ p.label }}</a></li>
+  @endeach
+</ul>
