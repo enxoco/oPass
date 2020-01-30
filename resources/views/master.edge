@@ -16,33 +16,24 @@
   {{ script('https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js') }} 
 
   <script>
-    function copyPass() {
-      let pass = document.getElementById("passField");
-
-      if (pass.type === 'password') {
-        pass.type = 'text'
-        pass.select()
+ 
+  $('.copyClipboard').on('click', function() {
+    let input = $(this).parent().parent().find('input')
+    console.log(input.attr('type'))
+    let i = input.attr('type')
+    if (i === 'password') {
+        input.attr('type', 'text')
+        input.select()
         document.execCommand('copy')
-        pass.blur()
-        pass.type = 'password'
+        input.blur()
+        input.attr('type', 'password')
       } else {
-        pass.select()
+        input.select()
         document.execCommand('copy')
-        pass.deselect()
-        pass.blur()
+        input.blur()
       }
 
-    }
-    function revealPass() {
-  /* Get the text field */
-    let pass = document.getElementById("passField");
-
-    if (pass.type === 'password') {
-      pass.type = 'text'
-    } else {
-      pass.type = 'password'
-    }
-  }
+  })
   </script>
 </body>
 </html>
