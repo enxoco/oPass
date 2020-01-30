@@ -17,9 +17,21 @@
 
   <script>
  
+  $('.revealPassword').on('click', function() {
+    let input = $(this).parent().parent().find('input')
+    let i = input.attr('type')
+    if (i === 'password') {
+        input.attr('type', 'text')
+        $(this).text('Hide')
+      } else {
+        input.attr('type', 'password')
+        $(this).text('Show')
+
+
+      }
+  })
   $('.copyClipboard').on('click', function() {
     let input = $(this).parent().parent().find('input')
-    console.log(input.attr('type'))
     let i = input.attr('type')
     if (i === 'password') {
         input.attr('type', 'text')
