@@ -48,15 +48,27 @@ class PasswordController {
 
     async PostPasswords({ request, response, view, session }) {
         const { friendly, domain, username, password, id } = request.all()
-        try {
-            const update = await Database
-            .table('secrets')
-            .update({label: friendly, domain, username, password})
-            .where('id', hashids.decode(id))
-            session.flash({ status: update })
-        } catch(e) {
-            session.flash({ error: e})
+        if (id) {
+            try {
+                const update = await Database
+                .table('secrets')
+                .update({label: friendly, domain, username, password})
+                .where('id', hashids.decode(id))
+                session.flash({ status: 'Password Updated successfully' })
+            } catch(e) {
+                session.flash({ error: e})
+            }   
+        } else {
+            try {
+                const update = await Database
+                .table('secrets')
+                .insert({label: friendly, domain, username, password})
+                session.flash({ status: 'Password created successfully' })
+            } catch(e) {
+                session.flash({ error: e})
+            }
         }
+
 
         return response.redirect('back')
     }
