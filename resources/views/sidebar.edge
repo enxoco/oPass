@@ -1,5 +1,4 @@
 
-<div class="row w-50">
 
   @if(old('errors'))
 <div class="alert alert-danger" role="alert">
@@ -30,19 +29,38 @@
   {{ old('status') }}
 </div>
 @endif
-  <div class="col d-flex flex-row bg-green align-items-center justify-content-between pt-3 pb-2">
-    <h2>Passwords</h2>
 
-    <h2 class=""><a href="/add"><svg class="lnr lnr-plus-circle"><use xlink:href="#lnr-plus-circle"></use></svg></a></h2>
-    <h2 class=""><a href="/import"><svg class="lnr lnr-enter"><use xlink:href="#lnr-enter"></use></svg></a></h2>
+<div class="row">
+
+  <div class="col d-flex flex-column bg-dark justify-content-center align-items center">
+    <span class="password-list bg-dark">
+    <h2>Passwords</h2>
+      <div class="bar-controls">
+        <a href="/password/manage" class="text-green hover-white"><svg class="lnr lnr-plus-circle"><use xlink:href="#lnr-plus-circle"></use></svg></a>
+        <a href="/import" class="text-green hover-white"><svg class="lnr lnr-enter"><use xlink:href="#lnr-enter"></use></svg></a>
+
+      </div>  
+      </span>
   </div>
-</div>
-<div class="row w-50">
 <div class="col d-flex flex-column bg-dark">
-  <ul class="list-group">
-    @each(p in passwords)
-      <li class="list-group-item password-list bg-dark"><a href="{{ p.id }}">{{ p.label }}</a><a class="ml-5" href="/password/remove/{{ p.id }}"><svg class="lnr lnr-trash"><use xlink:href="#lnr-trash"></use></svg></a></li>
-    @endeach
-  </ul>
+  <div class="password-list-wrapper">
+  @each(p in passwords)
+  <span class="password-list bg-dark">
+    <a href="{{ p.id }}">
+      {{ p.label }}
+    </a>
+    <div class="bar-controls">
+    <a class="mx-2" href="{{ p.id}}">
+      <svg class="lnr lnr-pencil"><use xlink:href="#lnr-pencil"></use></svg>
+    </a>
+      <a class="mx-2" href="/password/remove/{{ p.id }}">
+        <svg class="lnr lnr-trash">
+          <use xlink:href="#lnr-trash"></use>
+        </svg>
+      </a>
+    </div>  
+    </span>
+@endeach
+  </div>
 </div>
 </div>

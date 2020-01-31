@@ -101,6 +101,10 @@ h1 {
 .bg-green {
   background-color: #2ecc71;
 }
+.text-green {
+  color: #2ecc71;
+  font-size: 32px;
+}
 .captcha {
   display: flex;
   flex-direction: row;
@@ -132,16 +136,10 @@ button.btn.btn-outline-secondary {
   color: white;
 }
 
-.password-list {
-  font-weight: 800;
-}
+
 .password-list:hover {
   text-decoration: none;
   color: #3498db;
-}
-
-.list-group-item {
-  border-bottom: 4px solid white;
 }
 
 /* Add the following CSS block to your own
@@ -153,3 +151,53 @@ stylesheet. */
   height: 1em;
   vertical-align: -0.05em;
 }
+
+span.password-list.bg-dark {
+  font-weight: 300;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px solid gainsboro;
+  font-size: 18px;
+}
+
+span.password-list.bg-dark:hover {
+  color: white;
+  text-decoration: none;
+}
+a:hover {
+  color:#2ecc71;
+  text-decoration: none;
+}
+
+.hover-white:hover {
+  color: white !important;
+}
+
+.password-list-wrapper {
+  height: 550px;
+  overflow-y: scroll;
+}
+
+html, .password-list-wrapper {
+  --scrollbarBG:#34495e;
+  --thumbBG: #343a40;
+}
+
+body::-webkit-scrollbar, .password-list-wrapper::-webkit-scrollbar {
+  width: 20px;
+  
+}
+body, .password-list-wrapper  {
+  scrollbar-width: thick;
+  scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+}
+body::-webkit-scrollbar-track , .password-list-wrapper::-webkit-scrollbar-track {
+  background: var(--scrollbarBG);
+}
+body::-webkit-scrollbar-thumb, .password-list-wrapper::-webkit-scrollbar-thumb {
+  background-color: var(--thumbBG) ;
+  border-radius: 6px;
+  border: 3px solid var(--scrollbarBG);
+}
+

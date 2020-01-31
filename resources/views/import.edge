@@ -2,41 +2,16 @@
 
 @section('content')
 <div class="container-fluid pt-5">
-    <h1 class="text-center">oPass</h1>
-    <p class="text-center">A simple, secure <strong>free, open source</strong> password manager</p>
-    <div class="row">
-        <div class="col-1">
-        </div>
-        <div class="col-4 pl-5">
-        @include('sidebar')
-        </div>
-        <div class="col-4">
-            <div class="card bg-dark">
-                <div class="card-header">
-                    <h2><strong>
-                        Import Passwords
-                    </strong></h2>
-                    <p>This form allows you to import passwords LastPass.  (File should be in CSV Format)</p>
-                </div>
-                <div class="card-body">
-                    
-                    @if('error')
-                    {{ error }}
-                    @elseif('status')
-                    {{ status }}
-                    @endif
-                    <form method="POST" action="/import" enctype="multipart/form-data">
-                        {{ csrfField() }}
 
-                    <label for="pass_file">LastPass Export File</label><br>
-                    <input name="pass_file" id="file" type="file">
-              
-                        <div class="input-group mb-3 mx-auto d-flex mt-4">
-                            <button class="btn btn-outline-secondary" style="background:#2ecc71; font-size: 20px;" type="submit" value="Import">Import</button>
-                        </div>  
-                    </form>
-                </div>
+    <div class="row">
+        <div class="col-lg-3 col-12 ml-5">
+            @include('sidebar')
             </div>
+            <div class="col-lg-2"></div>
+        <div class="col-4">
+            <h1 class="text-center">oPass</h1>
+            <p class="text-center">A simple, secure <strong>free, open source</strong> password manager</p>
+            @include('components.cards.importPassword')
         </div>
     </div>
 </div>
