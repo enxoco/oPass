@@ -16,7 +16,7 @@
                     <h2><strong>
                         Import Passwords
                     </strong></h2>
-                    <p>This form allows you to import passwords from a CSV (such as a LastPass export)</p>
+                    <p>This form allows you to import passwords LastPass.  (File should be in CSV Format)</p>
                 </div>
                 <div class="card-body">
                     
@@ -28,10 +28,10 @@
                     <form method="POST" action="/import" enctype="multipart/form-data">
                         {{ csrfField() }}
 
-                    <label for="pass_file">Password File</label>
-                    <input name="pass_file" id="file" class="form-control muted" type="file">
+                    <label for="pass_file">LastPass Export File</label><br>
+                    <input name="pass_file" id="file" type="file">
               
-                        <div class="input-group mb-3 mx-auto d-flex">
+                        <div class="input-group mb-3 mx-auto d-flex mt-4">
                             <button class="btn btn-outline-secondary" style="background:#2ecc71; font-size: 20px;" type="submit" value="Import">Import</button>
                         </div>  
                     </form>

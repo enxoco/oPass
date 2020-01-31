@@ -20,6 +20,7 @@ Route.on('/').render('home')
 
 Route.get('/password/manage', 'PasswordController.GetPasswords')
 Route.post('/password/manage', 'PasswordController.PostPasswords')
+Route.get('/password/remove/:id', 'PasswordController.RemovePassword')
 Route.get('/password/:id', 'PasswordController.GetSinglePassword')
 Route.get('/import', 'PasswordController.GetImport')
 Route.post('/import', 'PasswordController.PostImport')

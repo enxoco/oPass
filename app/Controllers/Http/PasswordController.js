@@ -9,7 +9,8 @@ const fs = require('fs')
 class PasswordController {
 
     async GetImport({ request, response, view, session }) {
-        return view.render('import')
+        let passwords = await this.getAllPasswords()
+        return view.render('import', {passwords})
     }
 
     async PostImport({ request, response, view, session }) {   
@@ -52,10 +53,8 @@ class PasswordController {
             .table('secrets')
             .update({label: friendly, domain, username, password})
             .where('id', hashids.decode(id))
-            console.log(`update ${update}`)
             session.flash({ status: update })
         } catch(e) {
-            console.log(`error: ${e}`)
             session.flash({ error: e})
         }
 
@@ -68,7 +67,6 @@ class PasswordController {
         .select('id', 'label')
     
         passwords.forEach((password) => {
-            console.log(password)
             password.id = hashids.encode(password.id)
         })
         return passwords
@@ -83,6 +81,22 @@ class PasswordController {
         secret = secret[0]
         secret.id = id
         return view.render('passwords', {passwords, password: secret})
+    }
+
+    async RemovePassword({ request, response, view, params, session }) {
+        const { id } = params
+        try {
+            const update = await Database
+            .table('secrets')
+            .delete()
+            .where('id', hashids.decode(id))
+        } catch(e) {
+            session.flash({error: e})
+        }
+        session.flash({ status: 'Success' })
+
+        return response.redirect('back')
+
     }
 
     async GetPasswords({ view }) {
