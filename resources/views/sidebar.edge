@@ -1,5 +1,16 @@
-<ul class="list-group w-50">
-  @each(p in passwords)
-    <li class="list-group-item password-list"><a href="{{ p.id }}">{{ p.label }}</a></li>
-  @endeach
-</ul>
+<div class="row w-50">
+  <div class="col d-flex flex-row bg-green align-items-center justify-content-between pt-3 pb-2">
+    <h2>Passwords</h2>
+    <h2 class=""><a href="/add"><svg class="lnr lnr-plus-circle"><use xlink:href="#lnr-plus-circle"></use></svg></a></h2>
+    <h2 class=""><a href="/import"><svg class="lnr lnr-enter"><use xlink:href="#lnr-enter"></use></svg></a></h2>
+  </div>
+</div>
+<div class="row w-50">
+<div class="col d-flex flex-column bg-dark">
+  <ul class="list-group">
+    @each(p in passwords)
+      <li class="list-group-item password-list bg-dark"><a href="{{ p.id }}">{{ p.label }}</a></li>
+    @endeach
+  </ul>
+</div>
+</div>

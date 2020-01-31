@@ -1,0 +1,43 @@
+@layout('master')
+
+@section('content')
+<div class="container-fluid pt-5">
+    <h1 class="text-center">oPass</h1>
+    <p class="text-center">A simple, secure <strong>free, open source</strong> password manager</p>
+    <div class="row">
+        <div class="col-1">
+        </div>
+        <div class="col-4 pl-5">
+        @include('sidebar')
+        </div>
+        <div class="col-4">
+            <div class="card bg-dark">
+                <div class="card-header">
+                    <h2><strong>
+                        Import Passwords
+                    </strong></h2>
+                    <p>This form allows you to import passwords from a CSV (such as a LastPass export)</p>
+                </div>
+                <div class="card-body">
+                    
+                    @if('error')
+                    {{ error }}
+                    @elseif('status')
+                    {{ status }}
+                    @endif
+                    <form method="POST" action="/import" enctype="multipart/form-data">
+                        {{ csrfField() }}
+
+                    <label for="pass_file">Password File</label>
+                    <input name="pass_file" id="file" class="form-control muted" type="file">
+              
+                        <div class="input-group mb-3 mx-auto d-flex">
+                            <button class="btn btn-outline-secondary" style="background:#2ecc71; font-size: 20px;" type="submit" value="Import">Import</button>
+                        </div>  
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection

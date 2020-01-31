@@ -118,4 +118,38 @@ h1 {
   color: #f1c40f;
 }
 
-.main {}
+.bg-dark {
+  background: #34495e;
+  color: #ecf0f1;
+}
+
+.bg-green {
+  background: #2ecc71;
+  color: #34495e;
+}
+button.btn.btn-outline-secondary {
+  background: #3498db;
+  color: white;
+}
+
+.password-list {
+  font-weight: 800;
+}
+.password-list:hover {
+  text-decoration: none;
+  color: #3498db;
+}
+
+.list-group-item {
+  border-bottom: 4px solid white;
+}
+
+/* Add the following CSS block to your own
+stylesheet. */
+.lnr {
+  display: inline-block;
+  fill: currentColor;
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.05em;
+}

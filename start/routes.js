@@ -19,5 +19,8 @@ const Route = use('Route')
 Route.on('/').render('home')
 
 Route.get('/password/manage', 'PasswordController.GetPasswords')
+Route.post('/password/manage', 'PasswordController.PostPasswords')
 Route.get('/password/:id', 'PasswordController.GetSinglePassword')
+Route.get('/import', 'PasswordController.GetImport')
+Route.post('/import', 'PasswordController.PostImport')
 // Route.post('/password/retrieve', 'PasswordController.GetSinglePassword')
