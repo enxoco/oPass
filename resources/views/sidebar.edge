@@ -1,10 +1,8 @@
-
-
-  @if(old('errors'))
+@if(old('errors'))
 <div class="alert alert-danger" role="alert">
   <ul class="list-unstyled">
     @each(error in old('errors'))
-      <li>{{ error.message }}</li>
+    <li>{{ error.message }}</li>
     @endeach
   </ul>
 </div>
@@ -12,9 +10,11 @@
 
 @if(old('error'))
 <div class="alert alert-danger" role="alert">
-  <button type="button" class="btn delete" >
-    <svg class="lnr lnr-cross"><use xlink:href="#lnr-cross"></use></svg>
-</button>
+  <button type="button" class="btn delete">
+    <svg class="lnr lnr-cross">
+      <use xlink:href="#lnr-cross"></use>
+    </svg>
+  </button>
   {{ toJSON(old('error')) }}
 </div>
 
@@ -23,8 +23,10 @@
 
 @if(old('status'))
 <div class="alert alert-success w-100" role="alert">
-  <button type="button" class="btn delete" >
-    <svg class="lnr lnr-cross"><use xlink:href="#lnr-cross"></use></svg>
+  <button type="button" class="btn delete">
+    <svg class="lnr lnr-cross">
+      <use xlink:href="#lnr-cross"></use>
+    </svg>
   </button>
   {{ old('status') }}
 </div>
@@ -32,35 +34,48 @@
 
 <div class="row">
 
-  <div class="col d-flex flex-column bg-dark justify-content-center align-items center">
-    <span class="password-list bg-dark">
-    <h2>Passwords</h2>
-      <div class="bar-controls">
-        <a href="/password/manage" class="text-green hover-white"><svg class="lnr lnr-plus-circle"><use xlink:href="#lnr-plus-circle"></use></svg></a>
-        <a href="/import" class="text-green hover-white"><svg class="lnr lnr-enter"><use xlink:href="#lnr-enter"></use></svg></a>
+  <div class="col-12 d-flex flex-column bg-dark justify-content-center align-items center">
 
-      </div>  
-      </span>
-  </div>
-<div class="col d-flex flex-column bg-dark">
-  <div class="password-list-wrapper">
-  @each(p in passwords)
-  <span class="password-list bg-dark">
-    <a href="{{ p.id }}">
-      {{ p.label }}
-    </a>
-    <div class="bar-controls">
-    <a class="mx-2" href="{{ p.id}}">
-      <svg class="lnr lnr-pencil"><use xlink:href="#lnr-pencil"></use></svg>
-    </a>
-      <a class="mx-2" href="/password/remove/{{ p.id }}">
-        <svg class="lnr lnr-trash">
-          <use xlink:href="#lnr-trash"></use>
-        </svg>
-      </a>
-    </div>  
+    <span class="password-list bg-dark">
+      <h2>Passwords</h2>
+      <div class="bar-controls">
+        <a href="/password/manage" class="text-green hover-white"><svg class="lnr lnr-plus-circle">
+            <use xlink:href="#lnr-plus-circle"></use>
+          </svg></a>
+        <a href="/import" class="text-green hover-white"><svg class="lnr lnr-enter">
+            <use xlink:href="#lnr-enter"></use>
+          </svg></a>
+
+      </div>
+      
     </span>
-@endeach
+
+  <input type="text" id="myInput" onkeyup="searchList()" placeholder="Search for password.." class="form-control muted">
+
+    <div class="password-list-wrapper">
+      <ul id="passwordUl">
+        @each(p in passwords)
+        <span class="password-list bg-dark">
+
+          <a href="{{ p.id }}">
+            {{ p.label }} 
+          </a>
+          <div class="bar-controls">
+            <a class="mx-2" href="{{ p.id}}">
+              <svg class="lnr lnr-pencil">
+                <use xlink:href="#lnr-pencil"></use>
+              </svg>
+            </a>
+            <a class="mx-2" href="/password/remove/{{ p.id }}">
+              <svg class="lnr lnr-trash">
+                <use xlink:href="#lnr-trash"></use>
+              </svg>
+            </a>
+          </div>
+        </span>
+        </li>
+        @endeach
+      </ul>
+    </div>
   </div>
-</div>
 </div>

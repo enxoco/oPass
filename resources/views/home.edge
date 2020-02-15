@@ -1,12 +1,36 @@
 @layout('master')
 
 @section('content')
-<div class="container pt-5">
+<div class="container-fluid pt-5">
+
     <div class="row">
-        <div class="col-8 mx-auto">
-            <h1 class="text-center">oPass</h1>
-            <p class="text-center">A simple, secure <strong>free, open source</strong> password manager</p>
+        @loggedIn
+
+        <div class="col-lg-3 col-12 ml-5 my-5">
+            @include('sidebar')
+        </div>
+        <div class="col-lg-2"></div>
+
+        @endloggedIn
+
+        @loggedIn
+        <div class="col-4">
+            @else
+            <div class="col-5 mx-auto">
+                @endloggedIn
+                <h1 class="text-center">openPass</h1>
+                <p class="text-center">A simple, secure <strong>free, open source</strong> password manager</p>
+                @loggedIn
+                @if(password.id)
+                @!include('components.cards.editPassword')
+                @else
+                @!include('components.cards.addPassword')
+                @endif
+                @else
+                @!include('components.cards.login')
+                @endloggedIn
+
+            </div>
         </div>
     </div>
-</div>
-@endsection
+    @endsection

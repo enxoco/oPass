@@ -1,0 +1,36 @@
+@layout('master')
+
+@section('content')
+<div class="container-fluid pt-5">
+
+    <div class="row">
+
+        <div class="col-6 mx-auto">
+            <h1 class="text-center">oPass</h1>
+            <p class="text-center">A simple, secure <strong>free, open source</strong> password manager</p>
+            <div class="card">
+                <div class="card-header">
+                    Settings
+                </div>
+                <div class="card-body">
+                    <ul class="list-group">
+                        <li class="list-group-item">Import Passwords - <a href="/import" class="text-green hover-blue"><span class="badge float-right"><svg class="lnr lnr-enter">
+                            <use xlink:href="#lnr-enter"></use>
+                          </svg></a></span>
+                          <small>Import passwords, only supports CSV import from LastPass</small>
+                        </li>
+                        <li class="list-group-item">Export Passwords <small>Export passwords to CSV<a href="/export" class="text-green hover-blue"><span class="badge float-right"><svg class="lnr lnr-exit">
+                            <use xlink:href="#lnr-exit"></use>
+                          </svg></a></span>
+                        </li>
+                        <li class="list-group-item">View My Data - <small>View all of the data that we collect and store for you.</small> <a href="/export" class="text-green hover-blue"><span class="badge float-right"><svg class="lnr lnr-eye">
+                            <use xlink:href="#lnr-eye"></use>
+                          </svg></a></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection

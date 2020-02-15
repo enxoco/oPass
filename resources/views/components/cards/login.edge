@@ -1,0 +1,44 @@
+<div class="card bg-dark">
+    <div class="card-header">
+        <h2><strong>
+          Login
+        </strong></h2>
+    </div>
+    <div class="card-body">
+        
+
+        <form method="POST" action="/account/login">
+            {{ csrfField() }}
+
+        <label for="email">Email</label>
+        <div class="input-group mb-3">
+            <input type="email" name="email" class="form-control" placeholder="Enter your email" aria-label="Enter your email" aria-describedby="button-addon2" value="{{ old('email', '')}}">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary copyClipboard" type="button" tabindex="-1"><svg class="lnr lnr-envelope"><use xlink:href="#lnr-envelope"></use></svg></button>
+            </div>
+          </div>    
+          <label for="password">Password</label>
+          <div class="input-group mb-3">
+              <input type="password" name="password" class="form-control" placeholder="password" aria-label="password" aria-describedby="button-addon2" value="{{ old('password', '')}}">
+              <div class="input-group-append" tabindex="-1">
+                <button class="btn btn-outline-secondary revealPassword" type="button" tabindex="-1"><svg class="lnr lnr-eye"><use xlink:href="#lnr-eye"></use></svg></button>
+              </div>
+            </div> 
+ 
+              @if(getErrorFor('passError'))
+              <div class="alert alert-danger">
+                  {{ getErrorFor('passError') }}
+              </div>
+              @endif  
+              @if(old('error'))
+              <div class="alert alert-danger">
+                  {{ old('error') }}
+              </div>
+              @endif
+
+            <div class="input-group mb-3 mx-auto d-flex">
+                <button class="btn btn-outline-secondary" style="background:#2ecc71; font-size: 20px;" type="submit" value="Save">Login</button>
+            </div>  
+        </form>
+    </div>
+</div>

@@ -44,6 +44,26 @@
       }
 
   })
+
+  function searchList() {
+  // Declare variables
+  var input, filter, ul, span, a, i, txtValue;
+  input = document.getElementById('myInput');
+  filter = input.value.toUpperCase();
+  ul = document.getElementById("passwordUl");
+  span = ul.getElementsByTagName('span');
+
+  // Loop through all spanst items, and hide those who don't match the search query
+  for (i = 0; i < span.length; i++) {
+    a = span[i].getElementsByTagName("a")[0];
+    txtValue = a.textContent || a.innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      span[i].style.display = "";
+    } else {
+      span[i].style.display = "none";
+    }
+  }
+}
   </script>
 </body>
 </html>

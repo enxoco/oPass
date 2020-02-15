@@ -140,6 +140,7 @@ button.btn.btn-outline-secondary {
 .password-list:hover {
   text-decoration: none;
   color: #3498db;
+
 }
 
 /* Add the following CSS block to your own
@@ -157,7 +158,7 @@ span.password-list.bg-dark {
   padding: 20px;
   display: flex;
   justify-content: space-between;
-  border-bottom: 2px solid gainsboro;
+  /* border-bottom: 2px solid gainsboro; */
   font-size: 18px;
 }
 
@@ -177,6 +178,7 @@ a:hover {
 .password-list-wrapper {
   height: 550px;
   overflow-y: scroll;
+  width: 450px;
 }
 
 html, .password-list-wrapper {
@@ -201,3 +203,14 @@ body::-webkit-scrollbar-thumb, .password-list-wrapper::-webkit-scrollbar-thumb {
   border: 3px solid var(--scrollbarBG);
 }
 
+input#myInput {
+  font-size: 18px;
+}
+
+.hover-blue:hover {
+  color: #34495e;
+}
+
+.col-12.d-flex.flex-column.bg-dark.justify-content-center.align-items.center {
+  min-width: 465px;
+}

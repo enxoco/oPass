@@ -8,15 +8,37 @@ const papa = require('papaparse')
 const fs = require('fs')
 class PasswordController {
 
-    async GetImport({ request, response, view, session }) {
-        let passwords = await this.getAllPasswords()
+    async GetImport({ request, response, view, session, auth }) {
+        let passwords = await this.getAllPasswords(auth.user.id)
         return view.render('import', {passwords})
     }
 
-    async PostImport({ request, response, view, session }) {   
+    async PostImport({ request, response, view, session, auth }) {   
         const csv = request.file('pass_file')
+        const { pass_text } = request.all()
 
-        
+        if (pass_text){//Handle pasted in passwords
+            let json = papa.parse(pass_text)['data']
+            try {
+                for (var i = 1; i < json.length; i++){
+                    let p = json[i]
+                    await Database
+                        .table(`vault_${hashids.encode(auth.user.id)}`)
+                        .insert({
+                            'domain': p[0],
+                            'username': p[1],
+                            'password': p[2],
+                            'label': p[4]
+                        })
+                }
+            } catch(e){
+                session.flash({error: e})
+            }
+            session.flash( {status: 'success'})
+            return response.redirect('/password/manage')
+
+        }
+
         await csv.move(Helpers.tmpPath('uploads'), {
             name: 'custom-name.csv',
             overwrite: true
@@ -27,7 +49,7 @@ class PasswordController {
             for (var i = 1; i < json.length; i++){
                 let p = json[i]
                 await Database
-                    .table('secrets')
+                    .table(`vault_${hashids.encode(auth.user.id)}`)
                     .insert({
                         'domain': p[0],
                         'username': p[1],
@@ -46,12 +68,12 @@ class PasswordController {
         
     }
 
-    async PostPasswords({ request, response, view, session }) {
+    async PostPasswords({ request, response, view, session, auth }) {
         const { friendly, domain, username, password, id } = request.all()
         if (id) {
             try {
                 const update = await Database
-                .table('secrets')
+                .table(`vault_${hashids.encode(auth.user.id)}`)
                 .update({label: friendly, domain, username, password})
                 .where('id', hashids.decode(id))
                 session.flash({ status: 'Password Updated successfully' })
@@ -61,7 +83,7 @@ class PasswordController {
         } else {
             try {
                 const update = await Database
-                .table('secrets')
+                .table(`vault_${hashids.encode(auth.user.id)}`)
                 .insert({label: friendly, domain, username, password})
                 session.flash({ status: 'Password created successfully' })
             } catch(e) {
@@ -73,10 +95,10 @@ class PasswordController {
         return response.redirect('back')
     }
 
-    async getAllPasswords(){
+    async getAllPasswords(userId){
         let passwords = await Database
-        .table('secrets')
-        .select('id', 'label')
+        .table(`vault_${hashids.encode(userId)}`)
+        .select('id', 'label', 'domain', 'username')
     
         passwords.forEach((password) => {
             password.id = hashids.encode(password.id)
@@ -84,22 +106,23 @@ class PasswordController {
         return passwords
     }
 
-    async GetSinglePassword({ request, response, view, params }) {
+    async GetSinglePassword({ request, response, view, params, auth }) {
         const { id } = params
+        const userId = auth.user.id
         let secret = await Database
-            .table('secrets')
+            .table(`vault_${hashids.encode(userId)}`)
             .where('id', hashids.decode(id))
-        let passwords = await this.getAllPasswords()
+        let passwords = await this.getAllPasswords(auth.user.id)
         secret = secret[0]
         secret.id = id
         return view.render('passwords', {passwords, password: secret})
     }
 
-    async RemovePassword({ request, response, view, params, session }) {
+    async RemovePassword({ request, response, view, params, session, auth }) {
         const { id } = params
         try {
             const update = await Database
-            .table('secrets')
+            .table(`vault_${hashids.encode(auth.user.id)}`)
             .delete()
             .where('id', hashids.decode(id))
         } catch(e) {
@@ -111,9 +134,8 @@ class PasswordController {
 
     }
 
-    async GetPasswords({ view }) {
-        let passwords = await this.getAllPasswords()
-
+    async GetPasswords({ view, auth }) {
+        let passwords = await this.getAllPasswords(auth.user.id)
         return view.render('passwords', {passwords})
 
     }
